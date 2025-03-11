@@ -58,7 +58,7 @@ buttons.forEach(button =>{
             }
             
             if(numberOne !== null && numberTwo !== null){
-                numberOne = operate(numberOne, numberTwo, operators[0])
+                numberOne = operate(numberOne, numberTwo, operators[0]).toFixed(5)
                 operators.shift()
                 display.value = numberOne
                 numberTwo = null
@@ -67,6 +67,16 @@ buttons.forEach(button =>{
             }
             
             console.log(operators)
+        }
+        if(button.id === "decimal"){
+            if(currentInput.indexOf(".") === -1){
+                currentInput += "."
+                display.value = currentInput
+            }
+        }
+        if(button.id === "backspace"){
+            currentInput = currentInput.slice(0,-1)
+            display.value = currentInput
         }
         if(button.id === "equal"){
             if(currentInput !== "" && numberOne !== null) {
@@ -77,11 +87,12 @@ buttons.forEach(button =>{
             console.log(numberOne, operators[0], numberTwo)
             
             if(numberOne !== null && numberTwo !== null && operators.length > 0) {
-                numberOne = operate(numberOne, numberTwo, operators[0])
-                display.value = numberOne
+                numberOne = operate(numberOne, numberTwo, operators[0]).toFixed(5)
+                numberOne - Math.floor(numberOne) !== 0 ? display.value = numberOne : display.value = Math.floor(numberOne)
                 operators.shift()
                 numberTwo = null
             }
+            operators = []
         }
     })
 })
