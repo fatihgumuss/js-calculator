@@ -56,7 +56,6 @@ buttons.forEach(button =>{
                 }
                 currentInput = ""
             }
-            
             if(numberOne !== null && numberTwo !== null){
                 numberOne = operate(numberOne, numberTwo, operators[0]).toFixed(5)
                 operators.shift()
@@ -65,7 +64,10 @@ buttons.forEach(button =>{
             } else {
                 display.value = numberOne || "0"
             }
-            
+            if(button.id = "/" && numberTwo === 0){
+                display.value = "lmao"
+                currentInput = ""
+            }
             console.log(operators)
         }
         if(button.id === "decimal"){
@@ -86,7 +88,14 @@ buttons.forEach(button =>{
             
             console.log(numberOne, operators[0], numberTwo)
             
-            if(numberOne !== null && numberTwo !== null && operators.length > 0) {
+            if(operators[0] == "/" && numberTwo === 0){
+                display.value = "hayır" 
+                currentInput = ""
+                numberOne = null
+                numberTwo = null
+                operators = []
+            }
+            else if(numberOne !== null && numberTwo !== null && operators.length > 0) {
                 numberOne = operate(numberOne, numberTwo, operators[0]).toFixed(5)
                 numberOne - Math.floor(numberOne) !== 0 ? display.value = numberOne : display.value = Math.floor(numberOne)
                 operators.shift()
@@ -94,6 +103,7 @@ buttons.forEach(button =>{
             }
             operators = []
         }
+        console.log(numberOne, operators[0], numberTwo)
     })
 })
 
